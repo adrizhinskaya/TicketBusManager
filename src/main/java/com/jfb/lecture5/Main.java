@@ -16,6 +16,7 @@ public class Main {
     private static Byte ticketTypeViolationsCount = 0;
     private static Byte startDateViolationsCount = 0;
     private static Byte priceViolationsCount = 0;
+    private static Byte fileReadingErrorsCount = 0;
     private static String mostPopularViolation;
 
     private static void readAndCheckTickets() {
@@ -32,7 +33,8 @@ public class Main {
             }
             findMostPopularViolation();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.err.println("Error while reading file");
+            fileReadingErrorsCount++;
         }
     }
 
@@ -53,7 +55,9 @@ public class Main {
         System.out.printf("""
                 Total = %s
                 Valid = %s
-                Most popular violation = %s""", totalTickets, validTickets, mostPopularViolation);
+                Most popular violation = %s
+                Count of errors during file reading process:%s""",
+                totalTickets, validTickets, mostPopularViolation, fileReadingErrorsCount);
     }
 
     private static void checkTicket(BusTicket ticket) {
