@@ -20,6 +20,9 @@ target/
 *.ipr
 
 ### NetBeans ###
+.gradle/
+build/
+
 /nbproject/private/
 /nbbuild/
 /dist/
